@@ -50,3 +50,78 @@ Test your new function; I've provided some basic testing code in `code.test.js`.
 What is the worst-case asymptotic time complexity of your implementation? What
 is the worst-case asymptotic memory complexity? Add your answer, including your
 reasoning, to this markdown file.
+
+## Answer 
+
+- Edge cases:
+  - Checks if the matrix is empty or of size 1.
+    - These are constant time checks $O(1)$.
+  - Checking if all distances in the matrix are 0.
+    - Iterates over all rows and in each row iterates over $n$ elements.
+      - This takes exponential time $O(n^{2})$.
+- Generate initial random route:
+  - Creates initial array of size $n$.
+    - This is linear time $O(n)$.
+  - Randomizing the route iterates $n$ times performing constant time swaps.
+    - This is linear $O(n)$.
+- Route optimization (2-opt):
+  - Outer while loop at most iterates in exponential time
+    - $O(n^{2})$
+    - Nested for loops
+      - The outer loop runs $n$ times for $i$.
+      - The inner loop runs $n - i$ times which is about $n$ times for $k$
+        - This gives us exponential time complexity $O(n^{2})$ per while loop iteration.
+        - work done in nested loops
+          - 2-opt swap
+            - Uses operations that take linear time since the size of the reversed section is $k - i$.
+              - $O(n)$
+            - Calculating the distance of the new route.
+              - iterates over the route and sums up the distance between cities.
+              - $O(n)$
+  - Total work per `while` loop iteration.
+    - $O(n^{2}) \times O(n) = O(n^{3})$
+  - Restart on stagnation
+    - Generates a new route and recalculates it's distance.
+    - $O(n)$
+
+In our overall time complexity the edge case handling is $O(n^{2})$, but this is overshadowed by the route optimization.
+The main bottle neck is the nested loops. The route randomization is linear which does not significantly affect the worst-case time complexity. 
+During route optimization, the outer `while` loop iterates up to $O(n^2)$ times in the worst-case. Inside each `while` loop iteration, the nested `for` loops evaluate $O(n)$ combinations of indices $i$ and $k$. With each combination performing a 2-opt swap and distance calculation both requiring $O(n)$ work. Giving us $O(n^{3})$ work per `while` loop iteration. Restarting on stagnation involves generating a new random route and recalculating its distance which adds $O(n)$ complexity. Combining these factors the total worst-case time complexity is dominated by the route optimization resulting in  $\Theta(n^{2}) \times \Theta(n^{3}) = \Theta(n^{5})$. 
+
+The worst- case memory complexity is dominated by the input distance matrix which stores $n^{2}$ entries. Even though our algorithm creates new arrays during each 2-opt swap operation. Only one array exists at a time. 
+
+## Plagiarism Acknowledgement 
+Starting with the provided pseudocode I focused on setting up the 2opt swap function. For the stopping criteria I explored various options these included using a constant iteration limit, checking for continuous improvement, using a dynamic value that grows with the size of the route, and stagnation where the loop is ended if the stagnation threshold is reached. Ultimately, after looking at two other repositories I decided to choose a combination of stagnation resets and a dynamic iteration limit proportional to the size of the distance matrix. The idea was to ensure a balance between solution quality and efficiency.
+
+- https://github.com/COSC3020/tsp-local-search-Dhruv8806
+- https://github.com/COSC3020/tsp-local-search-DJReflexive
+
+“I certify that I have listed all sources used to complete this exercise, including the use
+of any Large Language Models. All of the work is my own, except where stated
+otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is
+suspected, charges may be filed against me without prior notice.”
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
