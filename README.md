@@ -45,6 +45,19 @@ returns the length of the shortest tour (not the tour itself).
 
 Test your new function; I've provided some basic testing code in `code.test.js`.
 
+## Stopping Criteria and selection of $i$ and $k$
+- Stopping Criteria:
+  - The algorithm uses a combination of two stoping criteria.
+  - Stagnation checks and iteration limit.
+    - Stagnation checks a threshold that restarts the search with a new random route. If no improvements are found after a second stagnation reset and the        stagnation resets a thrid time before reaching the iteration limit the loop stops.
+    - Iteration limit grows proportional to the size of the distance matrix $n^{2}$. This ensure the search scales with the problem size.
+  - I combined these criteria with the idea of trying to balance between solution quality and efficiency.
+- Choosing $i$ and $k$:
+  - The outer loop starts at $i = 1$ in order to keep the starting city fixed.
+  - The inner loop begins at $k = i + 1$ so that $k > i$.
+    - This prevents redundant evaluations and ensures that the segment is reversed for each valid combination.
+  - By using nested loops, all possible pairs (i, k) such that $i \leq i < k < n$ are explored. 
+
 ## Runtime Analysis
 
 What is the worst-case asymptotic time complexity of your implementation? What
