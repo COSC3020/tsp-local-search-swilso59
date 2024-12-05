@@ -91,7 +91,7 @@ During route optimization, the outer `while` loop iterates up to $O(n^2)$ times 
 The worst- case memory complexity is dominated by the input distance matrix which stores $n^{2}$ entries. Even though our algorithm creates new arrays during each 2-opt swap operation. Only one array exists at a time. 
 
 ## Plagiarism Acknowledgement 
-Starting with the provided pseudocode I focused on setting up the 2opt swap function. For the stopping criteria I explored various options these included using a constant iteration limit, checking for continuous improvement, using a dynamic value that grows with the size of the route, and stagnation where the loop is ended if the stagnation threshold is reached. Ultimately, after looking at two other repositories I decided to choose a combination of stagnation resets and a dynamic iteration limit proportional to the size of the distance matrix. The idea was to ensure a balance between solution quality and efficiency.
+Starting with the provided pseudocode I focused on setting up the 2opt swap function. For the stopping criteria I explored various options these included using a constant iteration limit, checking for continuous improvement, using a dynamic value that grows with the size of the route, and stagnation where the loop is ended if the stagnation threshold is reached. Ultimately, after looking at two other repositories I decided to choose a combination of stagnation resets and a dynamic iteration limit proportional to the size of the distance matrix. The idea was to achieve a balance between solution quality and efficiency.
 
 - https://github.com/COSC3020/tsp-local-search-Dhruv8806
 - https://github.com/COSC3020/tsp-local-search-DJReflexive
